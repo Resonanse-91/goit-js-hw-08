@@ -23,10 +23,20 @@ function loadFormState() {
 
 function onSubmit(event) {
   event.preventDefault();
+
+  const emailValue = input.value.trim();
+  const messageValue = textarea.value.trim();
+
+  if (emailValue === '' || messageValue === '') {
+    alert('Пожалуйста, заполните все поля.');
+    return;
+  }
+
   const feedback = {
-    email: input.value,
-    message: textarea.value,
+    email: emailValue,
+    message: messageValue,
   };
+
   console.log(feedback);
   localStorage.removeItem(KEY_STORAGE);
   input.value = '';
@@ -36,3 +46,4 @@ function onSubmit(event) {
 feedbackForm.addEventListener('input', throttle(inputEmail, 500));
 feedbackForm.addEventListener('submit', onSubmit);
 window.addEventListener('load', loadFormState);
+
